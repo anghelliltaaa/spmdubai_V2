@@ -32,7 +32,7 @@ function MobileCarousel({
       if (containerRef.current) {
         const w = containerRef.current.offsetWidth;
         setContainerW(w);
-        setCardW(w * 0.62);
+        setCardW(Math.min(w * 0.72, 320));
       }
     };
     measure();
@@ -113,9 +113,9 @@ function MobileCarousel({
               }}
               className="relative overflow-hidden shrink-0 cursor-pointer"
               style={{
-                width:  cardW || '62vw',
-                height: cardW ? cardW * 1.25 : '78vw',
-                border: isActive ? '1px solid rgba(201,168,76,0.35)' : '1px solid rgba(128,128,128,0.15)',
+                width:  cardW || '72vw',
+                height: cardW ? cardW * 1.35 : '90vw',
+                border: 'none',
                 filter: isActive ? 'none' : 'grayscale(70%) brightness(0.65)',
                 transition: 'filter 0.4s ease',
               }}
@@ -138,18 +138,42 @@ function MobileCarousel({
               {isActive && (
                 <div className="absolute bottom-0 left-0 right-0 p-4">
                   <div
-                    className="inline-flex items-center font-sans text-[9px] font-bold tracking-[0.2em] uppercase px-2 py-1 mb-2"
-                    style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.18)', color: '#FFF', backdropFilter: 'blur(6px)' }}
+                    className="inline-flex items-center font-sans font-bold tracking-[0.2em] uppercase px-2 py-1 mb-2"
+                    style={{
+                      fontSize: 'clamp(9px, 2.0vw, 11px)',
+                      background: 'rgba(255,255,255,0.1)',
+                      color: '#FFF',
+                      backdropFilter: 'blur(6px)',
+                    }}
                   >
                     {member.experience}
                   </div>
-                  <div className="font-sans text-[9px] font-bold tracking-[0.24em] uppercase mb-0.5" style={{ color: 'var(--gold)' }}>
+                  <div
+                    className="font-sans font-bold tracking-[0.24em] uppercase mb-0.5"
+                    style={{
+                      fontSize: 'clamp(10px, 2.2vw, 12px)',
+                      color: 'var(--gold)',
+                    }}
+                  >
                     {member.title}
                   </div>
-                  <h3 className="font-bold leading-tight mb-1" style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(16px, 4.5vw, 22px)', color: '#FFF' }}>
+                  <h3
+                    className="font-bold leading-tight mb-1"
+                    style={{
+                      fontFamily: 'var(--font-serif)',
+                      fontSize: 'clamp(18px, 5vw, 22px)',
+                      color: '#FFF',
+                    }}
+                  >
                     {member.name}
                   </h3>
-                  <p className="font-sans text-[11px] font-light leading-[1.6]" style={{ color: 'rgba(255,255,255,0.80)' }}>
+                  <p
+                    className="font-sans font-light leading-[1.6]"
+                    style={{
+                      fontSize: 'clamp(11px, 2.4vw, 13px)',
+                      color: 'rgba(255,255,255,0.80)',
+                    }}
+                  >
                     {member.bio}
                   </p>
                 </div>
@@ -162,7 +186,7 @@ function MobileCarousel({
                 </div>
               )}
               {isActive && (
-                <div className="absolute bottom-0 left-0 right-0 h-[2px]" style={{ background: 'var(--gold)' }} aria-hidden="true" />
+                <div className="absolute bottom-0 left-0 right-0 h-0.5" style={{ background: 'var(--gold)' }} aria-hidden="true" />
               )}
             </div>
           );
@@ -302,9 +326,7 @@ export function MeetTheTeam() {
                 style={{
                   background:   isActive ? 'rgba(238,235,228,0.15)' : 'var(--bg-surface)',
                   borderRadius: 0,
-                  border:       isActive
-                    ? '1px solid rgba(201,168,76,0.22)'
-                    : '1px solid rgba(128,128,128,0.15)',
+                  border:       'none',
                   minWidth: 0,
                 }}
                 aria-label={`View ${member.name}`}
@@ -343,10 +365,10 @@ export function MeetTheTeam() {
                       transition={{ duration: 0.45, ease: EASE_OUT_EXPO, delay: 0.18 }}
                     >
                       <div
-                        className="inline-flex items-center font-sans text-[9px] font-bold tracking-[0.2em] uppercase px-2.5 py-1 mb-3"
+                        className="inline-flex items-center font-sans font-bold tracking-[0.2em] uppercase px-2.5 py-1 mb-3"
                         style={{
+                          fontSize: 'clamp(9px, 1.9vw, 11px)',
                           background: 'rgba(255,255,255,0.1)',
-                          border: '1px solid rgba(255,255,255,0.18)',
                           color: '#FFFFFF',
                           backdropFilter: 'blur(6px)',
                         }}
@@ -354,8 +376,11 @@ export function MeetTheTeam() {
                         {member.experience}
                       </div>
                       <div
-                        className="font-sans text-[9px] font-bold tracking-[0.26em] uppercase mb-1"
-                        style={{ color: 'var(--gold)' }}
+                        className="font-sans font-bold tracking-[0.26em] uppercase mb-1"
+                        style={{
+                          fontSize: 'clamp(10px, 1.9vw, 12px)',
+                          color: 'var(--gold)',
+                        }}
                       >
                         {member.title}
                       </div>
@@ -370,8 +395,11 @@ export function MeetTheTeam() {
                         {member.name}
                       </h3>
                       <p
-                        className="font-sans text-[12px] font-light leading-[1.7]"
-                        style={{ color: 'rgba(255,255,255,0.88)' }}
+                        className="font-sans font-light leading-[1.7]"
+                        style={{
+                          fontSize: 'clamp(11px, 1.9vw, 13px)',
+                          color: 'rgba(255,255,255,0.88)',
+                        }}
                       >
                         {member.bio}
                       </p>
@@ -387,7 +415,7 @@ export function MeetTheTeam() {
                       style={{
                         writingMode: 'vertical-rl',
                         textOrientation: 'mixed',
-                        fontSize: '10px',
+                        fontSize: 'clamp(9px, 2.2vw, 11px)',
                         color: 'rgba(255,255,255,0.75)',
                         letterSpacing: '0.18em',
                       }}
@@ -400,7 +428,7 @@ export function MeetTheTeam() {
                 {/* Gold bottom line on active */}
                 {isActive && (
                   <div
-                    className="absolute bottom-0 left-0 right-0 h-[2px]"
+                    className="absolute bottom-0 left-0 right-0 h-0.5"
                     style={{ background: 'var(--gold)' }}
                     aria-hidden="true"
                   />

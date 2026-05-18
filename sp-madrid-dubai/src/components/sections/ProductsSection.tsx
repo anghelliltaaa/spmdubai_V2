@@ -129,8 +129,8 @@ export function ProductsSection() {
 
         {/* Accordion */}
         <motion.div
-          className="flex flex-col divide-y"
-          style={{ borderTop: '1px solid var(--bg-border)', borderBottom: '1px solid var(--bg-border)', divideColor: 'var(--bg-border)' }}
+          className="flex flex-col divide-y divide-[var(--bg-border)]"
+          style={{ borderTop: '1px solid var(--bg-border)', borderBottom: '1px solid var(--bg-border)' }}
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false, amount: 0.2 }}

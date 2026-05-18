@@ -89,7 +89,7 @@ export function AspinTowerSection() {
                   style={{
                     background: 'var(--bg-card-2)',
                     border: '1px solid var(--bg-border)',
-                  }}
+            }}
                   whileHover={{
                     y: -4,
                     borderColor: 'rgba(201,168,76,0.22)',
