@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'gold' | 'ghost' | 'outline';
+  variant?: 'gold' | 'ghost' | 'outline' | 'dark';
   size?: 'sm' | 'md' | 'lg';
   asChild?: boolean;
   href?: string;
@@ -24,6 +24,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       gold:    'bg-[var(--gold)] text-[#07090f] hover:bg-[var(--gold-light)] shadow-[0_4px_20px_rgba(201,168,76,0.22)] hover:shadow-[0_6px_28px_rgba(201,168,76,0.35)]',
       ghost:   'bg-transparent text-[var(--text-primary)] border border-[var(--bg-border-heavy)] hover:border-[var(--gold)] hover:text-[var(--gold)]',
       outline: 'bg-transparent text-[var(--gold)] border border-[var(--gold-border)] hover:bg-[var(--gold-dim)] hover:border-[var(--gold)]',
+      dark:    'bg-[#1A1814] text-[#E8E0D0] border border-[rgba(255,255,255,0.08)] hover:border-[var(--gold-border)] hover:text-[var(--gold)] shadow-[0_4px_16px_rgba(0,0,0,0.35)] hover:shadow-[0_6px_24px_rgba(0,0,0,0.45)]',
     };
 
     const sizes = {
@@ -37,6 +38,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       gold:    'rgba(255,255,255,0.28)',
       ghost:   'rgba(201,168,76,0.18)',
       outline: 'rgba(201,168,76,0.22)',
+      dark:    'rgba(255,255,255,0.06)',
     };
 
     return (

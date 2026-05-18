@@ -1,7 +1,20 @@
+'use client';
+
 import { SITE } from '@/lib/constants';
+import { useLang } from '@/contexts/LangContext';
 
 export function Footer() {
   const year = new Date().getFullYear();
+  const { t } = useLang();
+
+  const NAV_LINKS = [
+    [t.nav_legacy,      '#legacy'],
+    [t.proof_eyebrow,   '#proof'],
+    [t.adv_eyebrow,     '#advantage'],
+    [t.nav_caseStudies, '#stories'],
+    [t.nav_calculator,  '#calculator'],
+    [t.nav_contact,     '#contact'],
+  ] as const;
 
   return (
     <footer
@@ -11,36 +24,23 @@ export function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 sm:gap-12 mb-12">
           {/* Brand */}
           <div>
-            <div className="flex items-baseline gap-0.5 mb-2">
-              <span
-                className="font-black text-[26px] leading-none text-[var(--text-primary)]"
-                style={{ fontFamily: 'Arial Black, Impact, sans-serif' }}
-              >SP</span>
-              <span
-                className="font-black text-[26px] leading-none text-[var(--gold)]"
-                style={{ fontFamily: 'Arial Black, Impact, sans-serif' }}
-              >M</span>
+            <div className="mb-3">
+              <img
+                src="/SPMDubaiLogo.svg"
+                alt="S.P. Madrid Dubai"
+                className="spm-logo h-5 w-auto"
+              />
             </div>
-            <p className="font-sans text-[9px] font-bold tracking-[0.28em] uppercase text-[var(--text-muted)] mb-4">
-              S.P. Madrid — Dubai
-            </p>
             <p className="font-sans text-[13px] font-light leading-[1.8] text-[var(--text-faint)] max-w-[240px]">
-              DIFC-licensed debt recovery specialists. Protecting your receivables and your reputation across the Gulf.
+              {t.footer_tagline}
             </p>
           </div>
 
           {/* Navigation */}
           <div>
-            <h3 className="font-sans text-[9px] font-black tracking-[0.3em] uppercase text-[var(--gold)] mb-5">Navigation</h3>
+            <h3 className="font-sans text-[9px] font-black tracking-[0.3em] uppercase text-[var(--gold)] mb-5">{t.nav_contact}</h3>
             <ul className="space-y-3">
-              {[
-                ['Our Legacy', '#legacy'],
-                ['By the Numbers', '#proof'],
-                ['The Advantage', '#advantage'],
-                ['Case Studies', '#stories'],
-                ['Recovery Calculator', '#calculator'],
-                ['Contact', '#contact'],
-              ].map(([label, href]) => (
+              {NAV_LINKS.map(([label, href]) => (
                 <li key={href}>
                   <a
                     href={href}
@@ -55,7 +55,7 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="font-sans text-[9px] font-black tracking-[0.3em] uppercase text-[var(--gold)] mb-5">Dubai Office</h3>
+            <h3 className="font-sans text-[9px] font-black tracking-[0.3em] uppercase text-[var(--gold)] mb-5">{t.aspin_eyebrow}</h3>
             <address className="not-italic font-sans text-[13px] text-[var(--text-muted)] leading-[1.8] space-y-0.5">
               <p>Aspin Commercial Tower</p>
               <p>Dubai International Financial Centre</p>
@@ -80,7 +80,7 @@ export function Footer() {
           style={{ borderTop: '1px solid var(--bg-border)' }}
         >
           <p className="font-sans text-[11px] text-[var(--text-faint)]">
-            © {year} S.P. Madrid. DIFC Licensed. All rights reserved.
+            © {year} S.P. Madrid. DIFC Licensed. {t.footer_rights}
           </p>
           <div className="flex items-center gap-6">
             {['Privacy Policy', 'Terms', 'Compliance'].map((item) => (

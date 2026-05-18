@@ -16,12 +16,11 @@ export function Header() {
   const { theme, toggle } = useTheme();
   const { locale, t, toggle: toggleLang } = useLang();
 
+  // Internal anchor links (scroll-based)
   const NAV_LINKS = [
-    { label: t.nav_legacy,      href: '#legacy' },
-    { label: t.nav_commitment,  href: '#commitment' },
-    { label: t.nav_caseStudies, href: '#stories' },
-    { label: t.nav_calculator,  href: '#calculator' },
-    { label: t.nav_contact,     href: '#contact' },
+    { label: t.nav_legacy,         href: '#legacy',  external: false },
+    { label: t.nav_caseStudies,    href: '#stories', external: false },
+    { label: t.nav_philippine_hub, href: 'https://spmadridlaw.com/', external: true },
   ];
 
   useEffect(() => {
@@ -45,7 +44,7 @@ export function Header() {
   return (
     <header
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 h-[72px] flex items-center justify-between px-8 md:px-12',
+        'fixed top-0 left-0 right-0 z-50 h-[72px] flex items-center justify-between px-4 sm:px-8 md:px-12',
         'backdrop-blur-xl border-b transition-all duration-300',
         scrolled ? 'border-[var(--gold-border)]' : 'border-[var(--bg-border-heavy)]'
       )}
@@ -53,37 +52,33 @@ export function Header() {
       aria-label="Main navigation"
     >
       {/* Logo */}
-      <Link href="/" className="flex items-center gap-3.5 shrink-0" aria-label="S.P. Madrid Dubai">
-        <div className="flex items-baseline">
-          <span
-            className="font-black text-[28px] leading-none text-[var(--text-primary)] tracking-tight"
-            style={{ fontFamily: 'Arial Black, Impact, sans-serif' }}
-          >
-            SP
-          </span>
-          <span
-            className="font-black text-[28px] leading-none text-[var(--gold)] tracking-tight"
-            style={{ fontFamily: 'Arial Black, Impact, sans-serif' }}
-          >
-            M
-          </span>
-        </div>
-        <div className="w-px h-7 bg-white/20 shrink-0" aria-hidden="true" />
-        <div>
-          <div className="font-sans text-[11px] font-semibold tracking-[0.26em] uppercase text-[var(--text-mid)] leading-none">
-            S.P. Madrid
-          </div>
-          <div className="font-sans text-[9px] font-normal tracking-[0.14em] uppercase text-[var(--gold)] mt-0.5">
-            Dubai Office
-          </div>
-        </div>
+      <Link href="/" className="flex items-center shrink-0" aria-label="S.P. Madrid Dubai">
+        <img
+          src="/SPMDubaiLogo.svg"
+          alt="S.P. Madrid Dubai"
+          className="spm-logo h-4 w-auto"
+        />
       </Link>
 
       {/* Desktop nav */}
       <nav className="hidden lg:flex items-center gap-8" role="list" aria-label="Site navigation">
         {NAV_LINKS.map((link) => {
-          const isActive = activeSection === link.href.replace('#', '');
-          return (
+          const isActive = !link.external && activeSection === link.href.replace('#', '');
+          return link.external ? (
+            <a
+              key={link.href}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-sans text-[11px] font-semibold tracking-widest uppercase transition-colors duration-200 relative group text-[var(--text-muted)] hover:text-[var(--gold)]"
+            >
+              {link.label}
+              <span
+                className="absolute -bottom-1 left-0 right-0 h-px bg-[var(--gold)] transition-transform duration-250 origin-left scale-x-0 group-hover:scale-x-100"
+                aria-hidden="true"
+              />
+            </a>
+          ) : (
             <a
               key={link.href}
               href={link.href}
@@ -139,7 +134,7 @@ export function Header() {
             </motion.span>
           </AnimatePresence>
         </button>
-        <Button size="md" variant="gold" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
+        <Button size="sm" variant="gold" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
           {t.nav_consult}
         </Button>
       </div>
@@ -189,16 +184,17 @@ export function Header() {
       {/* Mobile menu panel */}
       {mobileOpen && (
         <div
-          className="absolute top-[72px] left-0 right-0 backdrop-blur-xl border-b border-[var(--gold-border)] lg:hidden"
-          style={{ background: 'color-mix(in srgb, var(--bg) 97%, transparent)' }}
+          className="absolute top-[72px] left-0 right-0 backdrop-blur-xl border-b border-[var(--gold-border)] lg:hidden overflow-y-auto"
+          style={{ background: 'color-mix(in srgb, var(--bg) 97%, transparent)', maxHeight: 'calc(100vh - 72px)' }}
         >
           <nav className="flex flex-col py-4 px-8 gap-1">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
+                {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                 className="py-3 font-sans text-[11px] font-semibold tracking-widest uppercase text-[var(--text-muted)] hover:text-[var(--gold)] border-b border-[var(--bg-border)] transition-colors"
-                onClick={() => setMobileOpen(false)}
+                onClick={() => !link.external && setMobileOpen(false)}
               >
                 {link.label}
               </a>

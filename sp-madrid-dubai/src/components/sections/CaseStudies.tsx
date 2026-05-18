@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, MapPin } from 'lucide-react';
 import { SectionHeader } from '@/components/ui/section-header';
-import { caseStudies } from '@/data/case-studies';
+import { caseStudiesEn, caseStudiesAr } from '@/data/case-studies';
 import { cn } from '@/lib/utils';
 import { useLang } from '@/contexts/LangContext';
 
@@ -62,19 +62,20 @@ export function CaseStudies() {
     return () => window.removeEventListener('keydown', handler);
   }, [next, prev]);
 
+  const { t, locale } = useLang();
+  const caseStudies = locale === 'ar' ? caseStudiesAr : caseStudiesEn;
   const card = caseStudies[active];
-  const { t } = useLang();
 
   const variants = {
-    enter: (d: number) => ({ opacity: 0, x: d > 0 ? 80 : -80, scale: 0.96 }),
-    center: { opacity: 1, x: 0, scale: 1 },
-    exit:  (d: number) => ({ opacity: 0, x: d > 0 ? -80 : 80, scale: 0.96 }),
+    enter: (d: number) => ({ opacity: 0, x: d > 0 ? 100 : -100, scale: 0.97, filter: 'blur(4px)' }),
+    center: { opacity: 1, x: 0, scale: 1, filter: 'blur(0px)' },
+    exit:  (d: number) => ({ opacity: 0, x: d > 0 ? -100 : 100, scale: 0.97, filter: 'blur(4px)' }),
   };
 
   return (
     <section
       id="stories"
-      className="py-28 relative overflow-hidden"
+      className="py-16 md:py-28 relative overflow-hidden"
       style={{ background: 'var(--bg)' }}
       aria-label="Client Success Stories"
     >
@@ -89,7 +90,41 @@ export function CaseStudies() {
         aria-hidden="true"
       />
 
-      <div className="max-w-6xl mx-auto px-8">
+      {/* Arabic zellige 12-pointed star pattern */}
+      <svg
+        className="absolute inset-0 w-full h-full pointer-events-none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+        style={{ opacity: 0.20 }}
+        preserveAspectRatio="xMidYMid slice"
+      >
+        <defs>
+          <pattern id="zellige-cs" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+            {/* 12-pointed star at center */}
+            <polygon points="50,10 55,35 78,22 65,44 92,44 72,58 88,78 65,68 65,95 50,78 35,95 35,68 12,78 28,58 8,44 35,44 22,22 45,35" fill="none" stroke="#C9A84C" strokeWidth="0.9"/>
+            {/* Inner hexagon */}
+            <polygon points="50,28 64,36 64,52 50,60 36,52 36,36" fill="none" stroke="#C9A84C" strokeWidth="0.75"/>
+            {/* Outer frame */}
+            <rect x="1" y="1" width="98" height="98" fill="none" stroke="#C9A84C" strokeWidth="0.5"/>
+            {/* Corner accents */}
+            <polygon points="0,0 14,0 0,14" fill="none" stroke="#C9A84C" strokeWidth="0.6"/>
+            <polygon points="100,0 86,0 100,14" fill="none" stroke="#C9A84C" strokeWidth="0.6"/>
+            <polygon points="0,100 14,100 0,86" fill="none" stroke="#C9A84C" strokeWidth="0.6"/>
+            <polygon points="100,100 86,100 100,86" fill="none" stroke="#C9A84C" strokeWidth="0.6"/>
+            {/* Center dot */}
+            <circle cx="50" cy="50" r="3" fill="#C9A84C"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#zellige-cs)"/>
+      </svg>
+      {/* Vignette */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse 90% 85% at 50% 50%, transparent 50%, var(--bg) 100%)' }}
+        aria-hidden="true"
+      />
+
+      <div className="max-w-6xl mx-auto px-5 sm:px-8">
         <SectionHeader
           eyebrow={t.cs_eyebrow}
           title={t.cs_title}
@@ -121,14 +156,14 @@ export function CaseStudies() {
               initial="enter"
               animate="center"
               exit="exit"
-              transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             >
               <div
                 className="grid grid-cols-1 md:grid-cols-2 border"
                 style={{ background: 'var(--bg-card)', borderColor: 'var(--bg-border)', borderLeft: '2px solid var(--gold)' }}
               >
                 {/* Left: challenge + results */}
-                <div className="p-8 md:p-12 border-r" style={{ borderColor: 'var(--bg-border)' }}>
+                <div className="p-5 sm:p-6 md:p-12 border-b md:border-b-0 md:border-r" style={{ borderColor: 'var(--bg-border)' }}>
                   <div className="flex items-center gap-2 mb-2">
                     <MapPin size={12} color="var(--text-muted)" />
                     <span className="font-sans text-xs text-[var(--text-muted)]">{card.location}</span>
@@ -166,7 +201,7 @@ export function CaseStudies() {
                 </div>
 
                 {/* Right: quote + attribution */}
-                <div className="p-8 md:p-12 flex flex-col justify-between">
+                <div className="p-5 sm:p-6 md:p-12 flex flex-col justify-between">
                   <blockquote
                     className="font-sans text-base font-light italic leading-[1.8] text-[var(--text-mid)] border-l-2 pl-5 mb-8"
                     style={{ borderColor: 'rgba(201,168,76,0.28)' }}

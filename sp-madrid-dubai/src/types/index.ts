@@ -10,8 +10,8 @@ export interface Stat {
 
 export interface TimelineMilestone {
   year: number;
-  title: string;
-  description: string;
+  titleKey: string;
+  descKey: string;
   isKeyYear?: boolean;
 }
 

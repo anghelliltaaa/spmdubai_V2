@@ -9,6 +9,7 @@ import { SITE } from '@/lib/constants';
 import { Button } from '@/components/ui/button';
 import { SectionHeader } from '@/components/ui/section-header';
 import { cn } from '@/lib/utils';
+import { useLang } from '@/contexts/LangContext';
 
 const schema = z.object({
   name:         z.string().min(2, 'Full name required'),
@@ -23,6 +24,7 @@ type FormValues = z.infer<typeof schema>;
 
 export function FinalCTA() {
   const [submitted, setSubmitted] = useState(false);
+  const { t } = useLang();
 
   const {
     register,
@@ -60,7 +62,7 @@ export function FinalCTA() {
   return (
     <section
       id="contact"
-      className="py-28 relative overflow-hidden"
+      className="py-16 md:py-28 relative overflow-hidden"
       style={{ background: 'var(--bg-surface)' }}
       aria-label="Contact SPM Dubai"
     >
@@ -75,9 +77,9 @@ export function FinalCTA() {
 
       <div className="max-w-5xl mx-auto px-5 sm:px-8">
         <SectionHeader
-          eyebrow="Get in Touch"
-          title="Start Your Recovery Today"
-          sub="Speak with a DIFC-licensed specialist. No obligation — just clarity on what's recoverable and how quickly."
+          eyebrow={t.contact_eyebrow}
+          title={t.contact_title}
+          sub={t.contact_sub}
         />
 
         {submitted ? (
@@ -93,77 +95,101 @@ export function FinalCTA() {
               <span className="text-[var(--gold)] text-2xl">✓</span>
             </div>
             <h3 className="font-serif text-2xl font-bold text-[var(--text-primary)] mb-3" style={{ fontFamily: 'var(--font-serif)' }}>
-              Message Received
+              {t.contact_success_title}
             </h3>
             <p className="font-sans text-sm text-[var(--text-muted)] max-w-sm mx-auto">
-              Our Dubai team will respond within one business day. Thank you for reaching out.
+              {t.contact_success_sub}
             </p>
           </motion.div>
         ) : (
-          <form
+          <motion.form
             onSubmit={handleSubmit(onSubmit)}
             className="grid grid-cols-1 md:grid-cols-2 gap-5"
             noValidate
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.07, delayChildren: 0.1 } },
+            }}
           >
-            <div>
+            <motion.div
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16,1,0.3,1] } } }}
+            >
               <label className="block font-sans text-[10px] font-bold tracking-widest uppercase text-[var(--gold)] mb-1.5">
-                Full Name *
+                {t.contact_name}
               </label>
               <input {...register('name')} placeholder="John Smith" className={inputCls(!!errors.name)} />
               {errors.name && <p className="mt-1 font-sans text-xs text-red-400">{errors.name.message}</p>}
-            </div>
+            </motion.div>
 
-            <div>
+            <motion.div
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16,1,0.3,1] } } }}
+            >
               <label className="block font-sans text-[10px] font-bold tracking-widest uppercase text-[var(--gold)] mb-1.5">
-                Company *
+                {t.contact_company}
               </label>
               <input {...register('company')} placeholder="Your Company" className={inputCls(!!errors.company)} />
               {errors.company && <p className="mt-1 font-sans text-xs text-red-400">{errors.company.message}</p>}
-            </div>
+            </motion.div>
 
-            <div>
+            <motion.div
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16,1,0.3,1] } } }}
+            >
               <label className="block font-sans text-[10px] font-bold tracking-widest uppercase text-[var(--gold)] mb-1.5">
-                Email *
+                {t.contact_email}
               </label>
               <input {...register('email')} type="email" placeholder="you@company.com" className={inputCls(!!errors.email)} />
               {errors.email && <p className="mt-1 font-sans text-xs text-red-400">{errors.email.message}</p>}
-            </div>
+            </motion.div>
 
-            <div>
+            <motion.div
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16,1,0.3,1] } } }}
+            >
               <label className="block font-sans text-[10px] font-bold tracking-widest uppercase text-[var(--gold)] mb-1.5">
-                Phone
+                {t.contact_phone}
               </label>
               <input {...register('phone')} type="tel" placeholder="+971 XX XXX XXXX" className={inputCls(false)} />
-            </div>
+            </motion.div>
 
-            <div className="md:col-span-2">
+            <motion.div
+              className="md:col-span-2"
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16,1,0.3,1] } } }}
+            >
               <label className="block font-sans text-[10px] font-bold tracking-widest uppercase text-[var(--gold)] mb-1.5">
-                Estimated Portfolio Size (AED) *
+                {t.contact_portfolio}
               </label>
               <select {...register('portfolioAED')} className={inputCls(!!errors.portfolioAED)} style={{ color: 'var(--text-muted)' }}>
-                <option value="">Select range…</option>
-                <option value="under-5m">Under AED 5M</option>
-                <option value="5m-25m">AED 5M – 25M</option>
-                <option value="25m-100m">AED 25M – 100M</option>
-                <option value="100m-500m">AED 100M – 500M</option>
-                <option value="500m+">AED 500M+</option>
+                <option value="">{t.contact_portfolio_placeholder}</option>
+                <option value="under-5m">{t.contact_portfolio_opt1}</option>
+                <option value="5m-25m">{t.contact_portfolio_opt2}</option>
+                <option value="25m-100m">{t.contact_portfolio_opt3}</option>
+                <option value="100m-500m">{t.contact_portfolio_opt4}</option>
+                <option value="500m+">{t.contact_portfolio_opt5}</option>
               </select>
               {errors.portfolioAED && <p className="mt-1 font-sans text-xs text-red-400">{errors.portfolioAED.message}</p>}
-            </div>
+            </motion.div>
 
-            <div className="md:col-span-2">
+            <motion.div
+              className="md:col-span-2"
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16,1,0.3,1] } } }}
+            >
               <label className="block font-sans text-[10px] font-bold tracking-widest uppercase text-[var(--gold)] mb-1.5">
-                Message (Optional)
+                {t.contact_message}
               </label>
               <textarea
                 {...register('message')}
                 rows={4}
-                placeholder="Briefly describe your recovery challenge…"
+                placeholder={t.contact_message_placeholder}
                 className={cn(inputCls(false), 'resize-none')}
               />
-            </div>
+            </motion.div>
 
-            <div className="md:col-span-2">
+            <motion.div
+              className="md:col-span-2"
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16,1,0.3,1] } } }}
+            >
               <Button
                 type="submit"
                 size="lg"
@@ -171,13 +197,13 @@ export function FinalCTA() {
                 className="w-full md:w-auto min-w-[240px]"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? 'Sending…' : 'Request Consultation'}
+                {isSubmitting ? t.contact_submitting : t.contact_submit}
               </Button>
               <p className="mt-3 font-sans text-xs text-[var(--text-faint)]">
-                By submitting, you agree to our Privacy Policy. We will never share your information.
+                {t.contact_privacy}
               </p>
-            </div>
-          </form>
+            </motion.div>
+          </motion.form>
         )}
       </div>
     </section>

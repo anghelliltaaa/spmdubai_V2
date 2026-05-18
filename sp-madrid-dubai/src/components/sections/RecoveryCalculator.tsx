@@ -6,6 +6,7 @@ import { SectionHeader } from '@/components/ui/section-header';
 import { Button } from '@/components/ui/button';
 import { calculateRecovery, type RecoveryInput } from '@/lib/calculations';
 import { cn } from '@/lib/utils';
+import { useLang } from '@/contexts/LangContext';
 
 type DPD = RecoveryInput['dpdBucket'];
 type Sector = RecoveryInput['sector'];
@@ -37,6 +38,7 @@ export function RecoveryCalculator() {
   const [dpd, setDpd] = useState<DPD>('90-179');
   const [sector, setSector] = useState<Sector>('banking');
   const [result, setResult] = useState<ReturnType<typeof calculateRecovery> | null>(null);
+  const { t } = useLang();
 
   function handleCalculate() {
     setResult(calculateRecovery({ portfolioSize: portfolio, dpdBucket: dpd, sector }));
@@ -48,28 +50,28 @@ export function RecoveryCalculator() {
   return (
     <section
       id="calculator"
-      className="py-28 relative overflow-hidden"
+      className="py-16 md:py-28 relative overflow-hidden"
       style={{ background: 'var(--bg)' }}
       aria-label="Recovery Calculator"
     >
       <div className="max-w-5xl mx-auto px-5 sm:px-8">
         <SectionHeader
-          eyebrow="Recovery Calculator"
-          title="Estimate Your Recovery"
-          sub="Get an indicative recovery projection in under 30 seconds. For a full portfolio assessment, speak to our team."
+          eyebrow={t.calc_eyebrow}
+          title={t.calc_title}
+          sub={t.calc_sub}
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
           {/* Inputs */}
           <div
-            className="p-8 border"
+            className="p-5 sm:p-6 md:p-8 border"
             style={{ background: 'var(--bg-card-2)', borderColor: 'var(--bg-border)' }}
           >
             {/* Portfolio size */}
             <div className="mb-7">
               <div className="flex items-center justify-between mb-2">
                 <label className="font-sans text-[10px] font-bold tracking-widest uppercase text-[var(--gold)]">
-                  Portfolio Size (AED)
+                  {t.calc_portfolio_lbl}
                 </label>
                 <span className="font-sans text-[13px] font-semibold text-[var(--text-primary)]">
                   {formatAED(portfolio)}
@@ -110,7 +112,7 @@ export function RecoveryCalculator() {
             {/* DPD bucket */}
             <div className="mb-6">
               <label className="block font-sans text-[10px] font-bold tracking-widest uppercase text-[var(--gold)] mb-2">
-                Days Past Due (DPD)
+                {t.calc_dpd_lbl}
               </label>
               <div className="grid grid-cols-2 gap-2">
                 {DPD_OPTIONS.map((opt) => (
@@ -133,7 +135,7 @@ export function RecoveryCalculator() {
             {/* Sector */}
             <div className="mb-8">
               <label className="block font-sans text-[10px] font-bold tracking-widest uppercase text-[var(--gold)] mb-2">
-                Sector
+                {t.calc_sector_lbl}
               </label>
               <select
                 className={inputCls}
@@ -150,22 +152,22 @@ export function RecoveryCalculator() {
             </div>
 
             <Button size="lg" variant="gold" className="w-full" onClick={handleCalculate}>
-              Calculate Recovery
+              {t.calc_calculate}
             </Button>
           </div>
 
           {/* Results */}
           <div
-            className="p-7 sm:p-10 border min-h-[380px] flex flex-col justify-center"
+            className="p-5 sm:p-7 md:p-10 border flex flex-col justify-center"
             style={{ background: 'var(--bg-card)', borderColor: 'var(--bg-border)' }}
           >
             {!result ? (
               <div className="text-center">
                 <div className="font-sans text-[var(--text-faint)] text-sm leading-relaxed">
-                  Enter your portfolio details and click <strong className="text-[var(--text-muted)]">Calculate Recovery</strong> to see your indicative results.
+                  {t.calc_empty}
                 </div>
                 <div className="mt-6 text-[var(--text-faint)] text-xs">
-                  * Estimates are indicative only. Based on SPM Dubai historical recovery rates by sector and DPD bucket.
+                  {t.calc_disclaimer}
                 </div>
               </div>
             ) : (
@@ -175,7 +177,7 @@ export function RecoveryCalculator() {
                 transition={{ duration: 0.5 }}
               >
                 <div className="font-sans text-[10px] font-bold tracking-widest uppercase text-[var(--gold)] mb-2">
-                  Indicative Projection
+                  {t.calc_projection_lbl}
                 </div>
                 <div
                   className="font-bold leading-none mb-1"
@@ -184,25 +186,25 @@ export function RecoveryCalculator() {
                   {formatAED(result.estimatedRecovery)}
                 </div>
                 <div className="font-sans text-sm text-[var(--text-muted)] mb-8">
-                  estimated gross recovery ({Math.round(result.recoveryRate * 100)}% of portfolio)
+                  {Math.round(result.recoveryRate * 100)}% {t.calc_recovery_of}
                 </div>
 
-                <div className="grid grid-cols-3 gap-4 mb-8">
+                <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-8">
                   {[
-                    { label: 'Recovery Rate',   value: `${Math.round(result.recoveryRate * 100)}%` },
-                    { label: 'Est. Timeline',   value: `${result.timelineMonths} mo.` },
-                    { label: 'Projected ROI',   value: `${result.projectedROI}%` },
+                    { label: t.calc_recovery_rate, value: `${Math.round(result.recoveryRate * 100)}%` },
+                    { label: t.calc_timeline,       value: `${result.timelineMonths} mo.` },
+                    { label: t.calc_roi,             value: `${result.projectedROI}%` },
                   ].map((stat) => (
-                    <div key={stat.label} className="text-center p-3" style={{ background: 'var(--bg-card-2)', border: '1px solid var(--bg-border)' }}>
-                      <div className="font-sans text-lg font-bold text-[var(--text-primary)]">{stat.value}</div>
-                      <div className="font-sans text-[10px] tracking-wide text-[var(--text-faint)]">{stat.label}</div>
+                    <div key={stat.label} className="text-center p-2 sm:p-3" style={{ background: 'var(--bg-card-2)', border: '1px solid var(--bg-border)' }}>
+                      <div className="font-sans text-base sm:text-lg font-bold text-[var(--text-primary)]">{stat.value}</div>
+                      <div className="font-sans text-[9px] sm:text-[10px] tracking-wide text-[var(--text-faint)]">{stat.label}</div>
                     </div>
                   ))}
                 </div>
 
                 {/* Recovery bar */}
                 <div className="mb-2 flex justify-between font-sans text-[10px] text-[var(--text-faint)]">
-                  <span>Portfolio</span>
+                  <span>{t.calc_portfolio_bar}</span>
                   <span>{formatAED(portfolio)}</span>
                 </div>
                 <div className="h-2 rounded-full overflow-hidden" style={{ background: 'var(--bg-border)' }}>
@@ -218,11 +220,11 @@ export function RecoveryCalculator() {
                 <div className="mt-8">
                   <Button
                     size="md"
-                    variant="gold"
+                    variant="dark"
                     className="w-full"
                     onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
                   >
-                    Get Full Portfolio Assessment
+                    {t.calc_full_assessment}
                   </Button>
                 </div>
               </motion.div>

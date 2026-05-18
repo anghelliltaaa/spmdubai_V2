@@ -8,6 +8,7 @@ export interface Translations {
   nav_calculator: string;
   nav_contact: string;
   nav_consult: string;
+  nav_philippine_hub: string;
 
   // Hero
   hero_location: string;
@@ -28,6 +29,18 @@ export interface Translations {
   timeline_eyebrow: string;
   timeline_title: string;
   timeline_sub: string;
+  // Timeline items
+  tl_2004_title: string; tl_2004_desc: string;
+  tl_2007_title: string; tl_2007_desc: string;
+  tl_2010_title: string; tl_2010_desc: string;
+  tl_2013_title: string; tl_2013_desc: string;
+  tl_2016_title: string; tl_2016_desc: string;
+  tl_2018_title: string; tl_2018_desc: string;
+  tl_2021_title: string; tl_2021_desc: string;
+  tl_2023_title: string; tl_2023_desc: string;
+  tl_2024_title: string; tl_2024_desc: string;
+  tl_2025_title: string; tl_2025_desc: string;
+  tl_2026_title: string; tl_2026_desc: string;
 
   // Case Studies
   cs_eyebrow: string;
@@ -147,6 +160,28 @@ export interface Translations {
   // Footer / CTA
   footer_tagline: string;
   footer_rights: string;
+
+  // Visit the Office
+  office_eyebrow: string;
+  office_title: string;
+  office_sub: string;
+
+  // Meet the Team
+  team_eyebrow: string;
+  team_title: string;
+  team_sub: string;
+  team_ian_title: string;
+  team_ian_exp: string;
+  team_ian_bio: string;
+  team_anita_title: string;
+  team_anita_exp: string;
+  team_anita_bio: string;
+  team_mubarak_title: string;
+  team_mubarak_exp: string;
+  team_mubarak_bio: string;
+  team_ivy_title: string;
+  team_ivy_exp: string;
+  team_ivy_bio: string;
 }
 
 export const en: Translations = {
@@ -156,10 +191,11 @@ export const en: Translations = {
   nav_calculator:  'Calculator',
   nav_contact:     'Contact',
   nav_consult:     'Consult Us',
+  nav_philippine_hub: 'Philippine Hub',
 
   hero_location:  'Dubai, UAE',
-  hero_heading1:  'Where Twenty Years of Institutional Trust',
-  hero_heading2:  "Meets Dubai's Corporate Excellence.",
+  hero_heading1:  'Twenty Years of Trust.',
+  hero_heading2:  'Now in Dubai.',
   hero_sub:       'SPM Dubai delivers compliant, client-first receivables management that restores cash flow while protecting your brand — across the Gulf and beyond.',
   hero_cta_cases:   'View Case Studies',
   hero_cta_consult: 'Get a Consultation',
@@ -171,8 +207,31 @@ export const en: Translations = {
   stat_gulf:      'Years Gulf',
 
   timeline_eyebrow: '20 Years of Excellence',
-  timeline_title:   'From Manila to Dubai',
-  timeline_sub:     'A two-decade journey building the most trusted debt recovery operation in Southeast Asia — and now the Gulf.',
+  timeline_title:   'From Philippines to United Arab Emirates',
+  timeline_sub:     'A two-decade journey building the most trusted debt recovery operation in Southeast Asia — and now the UAE.',
+
+  tl_2004_title: 'Founded in the Philippines',
+  tl_2004_desc:  'S.P. Madrid established in Makati CBD with 12 professionals and a mission to redefine ethical collections in the Philippines.',
+  tl_2007_title: 'First Bank Partnership',
+  tl_2007_desc:  'Signed landmark agreement with a top-3 Philippine universal bank — managing PHP 2B+ receivables portfolio.',
+  tl_2010_title: 'ISO 9001 Certification',
+  tl_2010_desc:  'Achieved ISO 9001:2008 certification; first dedicated collections agency in the Philippines to do so.',
+  tl_2013_title: '1,000 Professionals',
+  tl_2013_desc:  'Workforce crosses 1,000 trained debt resolution specialists; operations span 17 provinces.',
+  tl_2016_title: 'Technology Division Launch',
+  tl_2016_desc:  'SPM Tech launched: AI-assisted debtor scoring and real-time portfolio dashboards deployed across all clients.',
+  tl_2018_title: 'Regional Expansion',
+  tl_2018_desc:  'First international engagement: cross-border enforcement partnerships established in Singapore and Hong Kong.',
+  tl_2021_title: 'ISO 27001 Data Security',
+  tl_2021_desc:  'Achieved ISO 27001 certification. Full data encryption and zero-breach record maintained to date.',
+  tl_2023_title: 'DIFC License Granted',
+  tl_2023_desc:  'Dubai International Financial Centre license approved. SPM Dubai office opens at Aspin Commercial Tower.',
+  tl_2024_title: 'AED 2.1B+ Recovered',
+  tl_2024_desc:  'Dubai portfolio exceeds AED 2.1B in total recoveries; 14-country cross-border enforcement network operational.',
+  tl_2025_title: 'AI Recovery Platform',
+  tl_2025_desc:  'SPM Insight AI platform launched — predictive debtor analysis reduces average collection time by 31% across UAE accounts.',
+  tl_2026_title: 'GCC Regional HQ',
+  tl_2026_desc:  'SPM Dubai designated as the regional headquarters for all GCC and North Africa operations. Bahrain and Saudi offices opened.',
 
   cs_eyebrow:      'Proven Results',
   cs_title:        'Client Success Stories',
@@ -285,6 +344,26 @@ export const en: Translations = {
 
   footer_tagline: 'Debt Recovery. Redefined.',
   footer_rights:  'All rights reserved.',
+
+  office_eyebrow: 'Experience Our Space',
+  office_title:   'Visit Us in Dubai',
+  office_sub:     'Our DIFC office at Aspin Commercial Tower is where strategy meets execution. Come see where Gulf-wide recovery operations are managed.',
+
+  team_eyebrow: 'The People Behind the Results',
+  team_title:   'Meet the Team',
+  team_sub:     'Our dedicated team consists of experts across legal, strategy and operations — each committed to driving results and protecting your interests.',
+  team_ian_title:    'CEO, S.P. Madrid',
+  team_ian_exp:      '15+ Years Experience',
+  team_ian_bio:      "Visionary leader driving S.P. Madrid's recovery excellence across the GCC with over 15 years of strategic and operational expertise.",
+  team_anita_title:  'Business Unit Director',
+  team_anita_exp:    '16+ Years Experience',
+  team_anita_bio:    'Leads business development and client partnerships with deep expertise in financial recovery and stakeholder relations.',
+  team_mubarak_title:'Executive Director',
+  team_mubarak_exp:  '20+ Years Experience',
+  team_mubarak_bio:  'Oversees executive operations and strategic initiatives, ensuring seamless delivery across all recovery mandates.',
+  team_ivy_title:    'Operations Manager',
+  team_ivy_exp:      '15+ Years Experience',
+  team_ivy_bio:      'Manages day-to-day operations and process optimization, ensuring efficiency and quality across all projects.',
 };
 
 export const ar: Translations = {
@@ -294,10 +373,11 @@ export const ar: Translations = {
   nav_calculator:  'الحاسبة',
   nav_contact:     'تواصل',
   nav_consult:     'استشِرنا',
+  nav_philippine_hub: 'المركز الفلبيني',
 
   hero_location:  'دبي، الإمارات',
-  hero_heading1:  'حيث تلتقي عشرون عامًا من الثقة المؤسسية',
-  hero_heading2:  'بتميّز دبي المؤسسي.',
+  hero_heading1:  'عشرون عامًا من الثقة.',
+  hero_heading2:  'الآن في دبي.',
   hero_sub:       'تقدّم SPM دبي إدارة المستحقات بالامتثال الكامل وأولوية العميل — لاسترداد التدفق النقدي وحماية علامتك التجارية في جميع أنحاء الخليج.',
   hero_cta_cases:   'اطّلع على دراسات الحالة',
   hero_cta_consult: 'احصل على استشارة',
@@ -309,8 +389,31 @@ export const ar: Translations = {
   stat_gulf:      'سنوات في الخليج',
 
   timeline_eyebrow: '٢٠ عامًا من التميّز',
-  timeline_title:   'من مانيلا إلى دبي',
-  timeline_sub:     'رحلة عقدَين في بناء أكثر عمليات استرداد الديون ثقةً في جنوب شرق آسيا — والآن في منطقة الخليج.',
+  timeline_title:   'من الفلبين إلى الإمارات العربية المتحدة',
+  timeline_sub:     'رحلة عقدَين في بناء أكثر عمليات استرداد الديون ثقةً في جنوب شرق آسيا — والآن في الإمارات.',
+
+  tl_2004_title: 'التأسيس في الفلبين',
+  tl_2004_desc:  'تأسست S.P. Madrid في حي ماكاتي التجاري بـ 12 متخصصًا، بمهمة إعادة تعريف التحصيل الأخلاقي في الفلبين.',
+  tl_2007_title: 'أول شراكة مصرفية',
+  tl_2007_desc:  'توقيع اتفاقية تاريخية مع أحد أكبر ثلاثة بنوك شاملة في الفلبين — لإدارة محفظة مستحقات تتجاوز 2 مليار بيزو.',
+  tl_2010_title: 'شهادة ISO 9001',
+  tl_2010_desc:  'حصلت على شهادة ISO 9001:2008؛ أول وكالة تحصيل متخصصة في الفلبين تحقق ذلك.',
+  tl_2013_title: '1,000 متخصص',
+  tl_2013_desc:  'تجاوز عدد الكوادر 1,000 متخصص مدرَّب في حل الديون؛ تمتد العمليات عبر 17 مقاطعة.',
+  tl_2016_title: 'إطلاق قسم التكنولوجيا',
+  tl_2016_desc:  'إطلاق SPM Tech: نشر تقييم المدينين بالذكاء الاصطناعي ولوحات متابعة المحافظ الفورية لجميع العملاء.',
+  tl_2018_title: 'التوسع الإقليمي',
+  tl_2018_desc:  'أول انخراط دولي: إنشاء شراكات تنفيذ عابرة للحدود في سنغافورة وهونغ كونغ.',
+  tl_2021_title: 'أمن البيانات ISO 27001',
+  tl_2021_desc:  'الحصول على شهادة ISO 27001. تشفير كامل للبيانات وسجل خالٍ من الاختراقات حتى اليوم.',
+  tl_2023_title: 'منح ترخيص DIFC',
+  tl_2023_desc:  'الموافقة على ترخيص مركز دبي المالي العالمي. افتتاح مكتب SPM دبي في برج أسبين التجاري.',
+  tl_2024_title: 'أكثر من 2.1 مليار درهم مستردّة',
+  tl_2024_desc:  'تجاوزت محفظة دبي 2.1 مليار درهم في إجمالي الاستردادات؛ شبكة التنفيذ العابرة للحدود في 14 دولة تعمل بكامل طاقتها.',
+  tl_2025_title: 'منصة الاسترداد بالذكاء الاصطناعي',
+  tl_2025_desc:  'إطلاق منصة SPM Insight AI — يُقلّص التحليل التنبؤي للمدينين متوسط وقت التحصيل بنسبة 31% عبر حسابات الإمارات.',
+  tl_2026_title: 'المقر الإقليمي لدول مجلس التعاون',
+  tl_2026_desc:  'تعيين SPM دبي مقرًا إقليميًا لجميع عمليات دول مجلس التعاون الخليجي وشمال أفريقيا. افتتاح مكاتب البحرين والمملكة العربية السعودية.',
 
   cs_eyebrow:      'نتائج مُثبتة',
   cs_title:        'قصص نجاح العملاء',
@@ -423,6 +526,26 @@ export const ar: Translations = {
 
   footer_tagline: 'استرداد الديون. بأسلوب مختلف.',
   footer_rights:  'جميع الحقوق محفوظة.',
+
+  office_eyebrow: 'اكتشف مساحتنا',
+  office_title:   'زُرنا في دبي',
+  office_sub:     'مكتبنا في مركز دبي المالي العالمي بمبنى أسبين التجاري هو حيث تلتقي الاستراتيجية بالتنفيذ. تعرّف على المكان الذي تُدار منه عمليات الاسترداد في منطقة الخليج.',
+
+  team_eyebrow: 'الأشخاص وراء النتائج',
+  team_title:   'تعرّف على الفريق',
+  team_sub:     'فريقنا المتخصص يضم خبراء في القانون والاستراتيجية والعمليات — كل منهم ملتزم بتحقيق النتائج وحماية مصالحك.',
+  team_ian_title:    'الرئيس التنفيذي، S.P. Madrid',
+  team_ian_exp:      'خبرة تزيد عن 15 عامًا',
+  team_ian_bio:      'قائد رؤيوي يقود تميّز S.P. Madrid في الاسترداد عبر دول مجلس التعاون الخليجي بأكثر من 15 عامًا من الخبرة الاستراتيجية والتشغيلية.',
+  team_anita_title:  'مديرة وحدة الأعمال',
+  team_anita_exp:    'خبرة تزيد عن 16 عامًا',
+  team_anita_bio:    'تقود تطوير الأعمال وشراكات العملاء بخبرة عميقة في الاسترداد المالي وإدارة علاقات أصحاب المصلحة.',
+  team_mubarak_title:'المدير التنفيذي',
+  team_mubarak_exp:  'خبرة تزيد عن 20 عامًا',
+  team_mubarak_bio:  'يشرف على العمليات التنفيذية والمبادرات الاستراتيجية، مما يضمن التسليم السلس عبر جميع تفويضات الاسترداد.',
+  team_ivy_title:    'مديرة العمليات',
+  team_ivy_exp:      'خبرة تزيد عن 15 عامًا',
+  team_ivy_bio:      'تدير العمليات اليومية وتحسين العمليات، مما يضمن الكفاءة والجودة في جميع المشاريع.',
 };
 
 export const locales: Record<Locale, Translations> = { en, ar };

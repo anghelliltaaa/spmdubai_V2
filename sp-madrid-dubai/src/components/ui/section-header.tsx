@@ -53,7 +53,7 @@ export function SectionHeader({ eyebrow, title, sub, className, align = 'center'
         {title}
       </h2>
       {sub && (
-        <p className="font-sans text-[15px] font-light leading-[1.8] text-[var(--text-muted)] max-w-2xl"
+        <p className="font-sans text-[15px] font-light leading-[1.8] text-[var(--text-muted)] max-w-2xl w-full"
           style={{ marginLeft: align === 'center' ? 'auto' : undefined, marginRight: align === 'center' ? 'auto' : undefined }}
         >
           {sub}

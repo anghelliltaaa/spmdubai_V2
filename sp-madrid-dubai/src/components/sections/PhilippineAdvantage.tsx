@@ -3,65 +3,56 @@
 import { motion } from 'framer-motion';
 import { Users, Cpu, Heart } from 'lucide-react';
 import { SectionHeader } from '@/components/ui/section-header';
-import { slideInLeft, slideInRight } from '@/lib/animations';
-
-const PILLARS = [
-  {
-    icon: Users,
-    subtitle: 'Regional Expertise',
-    title: 'The Human Engine',
-    description: 'Filipino legal professionals educated in both civil-law and common-law systems, fluent in Arabic, English, Tagalog and Spanish — uniquely equipped for Gulf cross-border disputes.',
-    points: [
-      '320+ bilingual attorneys across MENA and Asia',
-      'Average 9 years Gulf-region experience',
-      'Licensed in 6 jurisdictions simultaneously',
-    ],
-  },
-  {
-    icon: Cpu,
-    subtitle: 'Operational Depth',
-    title: 'The Back-Office Advantage',
-    description: 'Two decades of building enterprise-grade recovery infrastructure in Manila enables us to run operations at a scale and cost that no GCC-only firm can replicate.',
-    points: [
-      'ISO 9001 certified Manila operations hub',
-      '24 / 7 case tracking via client portal',
-      'AED cost savings passed to clients',
-    ],
-  },
-  {
-    icon: Heart,
-    subtitle: 'Cultural Bridge',
-    title: 'East–West Fluency',
-    description: "The Philippines has been the Gulf's workforce backbone for 40 years. That cultural proximity accelerates negotiations, prevents misunderstandings, and builds debtor trust faster.",
-    points: [
-      'Culturally aligned with GCC debtor profiles',
-      'Sharia-informed negotiation frameworks',
-      'Proven mediation success rate: 74%',
-    ],
-  },
-];
+import { slideInLeft, slideInRight, staggerList, listItem, EASE_OUT_EXPO } from '@/lib/animations';
+import { useLang } from '@/contexts/LangContext';
 
 const slideUp = {
-  hidden: { opacity: 0, y: 35 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: 'easeOut' as const } },
+  hidden:  { opacity: 0, y: 40, filter: 'blur(4px)' },
+  visible: { opacity: 1, y: 0,  filter: 'blur(0px)', transition: { duration: 0.75, ease: EASE_OUT_EXPO } },
 };
 
 export function PhilippineAdvantage() {
+  const { t } = useLang();
+
+  const PILLARS = [
+    {
+      icon: Users,
+      subtitle: t.adv_p1_sub,
+      title: t.adv_p1_title,
+      description: t.adv_p1_desc,
+      points: [t.adv_p1_pt1, t.adv_p1_pt2, t.adv_p1_pt3],
+    },
+    {
+      icon: Cpu,
+      subtitle: t.adv_p2_sub,
+      title: t.adv_p2_title,
+      description: t.adv_p2_desc,
+      points: [t.adv_p2_pt1, t.adv_p2_pt2, t.adv_p2_pt3],
+    },
+    {
+      icon: Heart,
+      subtitle: t.adv_p3_sub,
+      title: t.adv_p3_title,
+      description: t.adv_p3_desc,
+      points: [t.adv_p3_pt1, t.adv_p3_pt2, t.adv_p3_pt3],
+    },
+  ];
+
   return (
     <section
       id="advantage"
-      className="py-28 relative overflow-hidden"
+      className="py-16 md:py-28 relative overflow-hidden"
       style={{ background: 'var(--bg-surface)' }}
       aria-label="The Philippine Advantage"
     >
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
         <SectionHeader
-          eyebrow="The Philippine Advantage"
-          title="Why Our Roots Make Us Stronger"
-          sub="Twenty years of excellence in Manila built the operational foundation that makes SPM Dubai the most capable recovery partner in the Gulf."
+          eyebrow={t.adv_eyebrow}
+          title={t.adv_title}
+          sub={t.adv_sub}
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
           {PILLARS.map((pillar, i) => {
             const Icon = pillar.icon;
             const variant = i === 0 ? slideInLeft : i === 2 ? slideInRight : slideUp;
@@ -71,18 +62,27 @@ export function PhilippineAdvantage() {
                 variants={variant}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, amount: 0.2 }}
-                className="rounded-none p-8 border flex flex-col"
+                viewport={{ once: false, amount: 0.2 }}
+                className="rounded-none p-5 sm:p-6 md:p-8 border flex flex-col"
                 style={{
                   background: 'var(--bg-card)',
                   borderColor: 'var(--bg-border)',
-                  transition: 'border-color 0.25s',
                 }}
-                whileHover={{ borderColor: 'var(--gold-border)' } as never}
+                whileHover={{
+                  y: -8,
+                  borderColor: 'rgba(201,168,76,0.22)',
+                  boxShadow: '0 24px 56px rgba(201,168,76,0.10)',
+                  transition: { duration: 0.3, ease: EASE_OUT_EXPO },
+                } as never}
               >
-                <div className="mb-5">
-                  <Icon size={26} color="var(--gold)" aria-hidden="true" />
-                </div>
+                {/* Icon — bare, no box */}
+                <motion.div
+                  className="mb-5"
+                  whileHover={{ rotate: 15, scale: 1.1, transition: { duration: 0.3 } }}
+                >
+                  <Icon size={22} color="var(--gold)" aria-hidden="true" />
+                </motion.div>
+
                 <div className="font-sans text-[10px] font-bold tracking-widest uppercase text-[var(--gold)] mb-1">
                   {pillar.subtitle}
                 </div>
@@ -95,18 +95,33 @@ export function PhilippineAdvantage() {
                 <p className="font-sans text-sm font-light leading-relaxed text-[var(--text-muted)] mb-5">
                   {pillar.description}
                 </p>
-                <ul className="space-y-2 mt-auto">
+
+                {/* Bullet points stagger in */}
+                <motion.ul
+                  className="space-y-2 mt-auto"
+                  variants={staggerList}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: false, amount: 0.5 }}
+                >
                   {pillar.points.map((pt) => (
-                    <li key={pt} className="flex items-start gap-2.5 font-sans text-[12px] text-[var(--text-muted)]">
-                      <span
+                    <motion.li
+                      key={pt}
+                      variants={listItem}
+                      className="flex items-start gap-2.5 font-sans text-[12px] text-[var(--text-muted)]"
+                    >
+                      <motion.span
                         className="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"
                         style={{ background: 'var(--gold)' }}
                         aria-hidden="true"
+                        whileInView={{ scale: [0, 1.4, 1] }}
+                        viewport={{ once: false }}
+                        transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
                       />
                       {pt}
-                    </li>
+                    </motion.li>
                   ))}
-                </ul>
+                </motion.ul>
               </motion.div>
             );
           })}
