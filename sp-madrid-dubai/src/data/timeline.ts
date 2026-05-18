@@ -6,8 +6,8 @@ export interface TimelineMilestone {
 }
 
 export const timeline: TimelineMilestone[] = [
-  { year: 2004, titleKey: 'tl_2004_title', descKey: 'tl_2004_desc', isKeyYear: true },
-  { year: 2007, titleKey: 'tl_2007_title', descKey: 'tl_2007_desc' },
+  { year: 2008, titleKey: 'tl_2004_title', descKey: 'tl_2004_desc', isKeyYear: true },
+  { year: 2012, titleKey: 'tl_2007_title', descKey: 'tl_2007_desc' },
   { year: 2010, titleKey: 'tl_2010_title', descKey: 'tl_2010_desc' },
   { year: 2013, titleKey: 'tl_2013_title', descKey: 'tl_2013_desc' },
   { year: 2016, titleKey: 'tl_2016_title', descKey: 'tl_2016_desc' },
